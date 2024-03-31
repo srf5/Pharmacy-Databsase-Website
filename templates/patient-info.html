@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Information</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+</head>
+<body>
+    <div class="header">
+        <h1 class="website-name">Patient Information</h1>
+    </div>
+    <div class="menu">
+        <a href="/"> Home </a>
+        <a href="/doctor-info">Doctor Information</a>
+        <a href="/patient-info"> Patient Information </a>
+        <a href="/insert">Insert Patient, Doctor, Pharmacy, or Prescription</a>
+        <a href="/search"> Search results </a>
+    </div>
+    <form action="/patient-info" method="GET">
+        <label for="name">Enter Patient name:</label>
+        <input type="text" id="name" name="name" style="width:30%" required>
+        <input type="submit" value="Submit">
+    </form>
+    <div class="container">  
+        {% if patient_info %}
+        <h2>Patient Details</h2>
+        <p><strong>PID:</strong> {{ patient_info.pid }}</p>
+        <p><strong>Primary Doctor:</strong> {{ patient_info.primary_doctor }}</p>
+        {% if patient_info.normal_doctors %}
+        <p><strong>Normal Doctors:</strong></p>
+        <ul>
+            {% for patient in patient_info.normal_doctors %}
+            <li>{{ patient }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% if patient_info.Drugs %}
+        <p><strong>Drugs Prescribed:</strong></p>
+        <ul>
+            {% for drug in patient_info.Drugs %}
+            <li>{{ drug }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}        
+        {% endif %}
+    </div>
+
+</body>
+</html>

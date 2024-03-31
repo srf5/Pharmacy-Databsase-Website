@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Database</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    
+
+</head>
+<body>
+    <div class="header">
+        <h1 class="website-name">Insert Patient, Doctor, Pharmacy, or Prescription</h1>
+    </div>
+    <!-- Menu -->
+    <div class="menu">
+        <a href="/"> Home </a>
+        <a href="/doctor-info">Doctor Information</a>
+        <a href="/patient-info"> Patient Information </a>
+        <a href="/insert"> Insert Patient, Doctor, Pharmacy, or Prescription </a>
+        <a href="/search"> Search results </a>
+    </div>
+    <h2>Search Patients and Pharmacies by Location</h2>
+    <form action="/search-location" method="post">
+        <label for="location">Enter Location:</label>
+        <input type="text" id="location" name="location" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Patients living at or near the specified location:</h2>
+    <ul>
+        {% for patient in patients %}
+        <li>{{ patient['Name'] }}, Address: {{ patient['Address'] }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Pharmacies located at or near the specified location:</h2>
+    <ul>
+        {% for pharmacy in pharmacies %}
+        <li>{{ pharmacy['Name'] }}, Location: {{ pharmacy['Location'] }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

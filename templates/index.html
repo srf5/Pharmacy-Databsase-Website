@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Database</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+</head>
+<body>
+    <div class="header">
+        <h1 class="website-name">Pharmacy Database Website</h1>
+    </div>
+    <!-- Menu -->
+    <div class="menu">
+        <a href="/"> Home </a>
+        <a href="/doctor-info">Doctor Information</a>
+        <a href="/patient-info"> Patient Information </a>
+        <a href="/insert">Insert Patient, Doctor, Pharmacy, or Prescription</a>
+        <a href="/search"> Search results </a>
+    </div>
+    <h3>Total Number of Patients: {{ total_patients }}</h3>
+    <h2>Doctors</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>DID</th>
+                <th>Name</th>
+                <th>Specialty</th>
+                <th>Years of Experience</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctors %}
+            <tr>
+                {% for value in doctor %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Patients</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>Age</th>
+                <th>Addresses</th>
+                <th>Name</th>
+                <th>Primarily_examined_by</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                {% for value in patient %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Pharmacies</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>HID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Supervisor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pharmacy in pharmacies %}
+            <tr>
+                {% for value in pharmacy %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Drugs</h2>
+    <table border="1"> 
+        <thead>
+            <tr>
+                <th>MID</th>
+                <th>Formula</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for drug in drugs %}
+            <tr>
+                {% for value in drug %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Drugs Assigned and Number of Doctors Prescribing Each</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Drug Name</th>
+            <th>Number of Doctors Prescribing</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for drug in drugs_assigned %}
+        <tr>
+            <td>{{ drug[0] }}</td>
+            <td>{{ drug[1] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>

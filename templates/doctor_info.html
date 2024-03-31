@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Information</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+</head>
+<body>
+    <div class="header">
+        <h1 class="website-name">Doctor Information</h1>
+    </div>
+    <div class="menu">
+        <a href="/"> Home </a>
+        <a href="/doctor-info">Doctor Information</a>
+        <a href="/patient-info"> Patient Information </a>
+        <a href="/insert">Insert Patient, Doctor, Pharmacy, or Prescription</a>
+        <a href="/search"> Search results </a>
+    </div>
+    <form action="/doctor-info" method="GET">
+        <label for="doctor_id">Enter Doctor ID:</label>
+        <input type="number" id="doctor_id" name="doctor_id" style="width:30%" required>
+        <input type="submit" value="Submit">
+    </form>
+    <div class="container">  
+        {% if doctor_info %}
+        <h2>Doctor Details</h2>
+        <p><strong>Name:</strong> {{ doctor_info.name }}</p>
+        {% if doctor_info.patient_count > 0 %}
+        <p><strong>Number of Patients:</strong> {{ doctor_info.patient_count }}</p>
+        {%endif%}
+        {% if doctor_info.patient_names %}
+        <p><strong>Patients:</strong></p>
+        <ul>
+            {% for patient in doctor_info.patient_names %}
+            <li>{{ patient }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% if doctor_info.pharmacies %}
+        <p><strong>Pharmacies Supervised:</strong></p>
+        <ul>
+            {% for pharmacy in doctor_info.pharmacies %}
+            <li>{{ pharmacy }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% if doctor_info.prescribed_drugs %}
+        <p><strong>Prescribed Drugs:</strong></p>
+        <ul>
+            {% for drug in doctor_info.prescribed_drugs %}
+            <li>{{ drug }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% endif %}
+    </div>
+
+</body>
+</html>
